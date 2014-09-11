@@ -61,8 +61,12 @@ var dreambuild;
         };
 
         Widget.prototype._trigger = function (type, event, data) {
-            var o = this.options;
-            o[type] && o[type](event, data);
+            var handler = this.options[type];
+            if (typeof handler === "function") {
+                handler(event, data);
+            } else if (typeof handler === "string") {
+                (new Function(handler))(event, data);
+            }
         };
         return Widget;
     })();
@@ -172,9 +176,9 @@ var dreambuild;
 
 jQuery.fn.extend({
     getAttributes: function () {
-        var attributes = {};
-        if (this.length) {
-            $.each(this[0].attributes, function (index, attr) {
+        var attributes = {}, jq = this;
+        if (jq.length) {
+            $.each(jq[0].attributes, function (index, attr) {
                 attributes[attr.name] = attr.value;
             });
         }

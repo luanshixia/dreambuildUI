@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Foo</title>
+</head>
+<body>
+
+<div id="foo1">	
+</div>
+
+<div id="foo2">	
+</div>
+
+<foo text="Another Foo."></foo>
+
+<script src="js/jquery.js"></script>
+<script src="src/dreambuild.js"></script>
+<script src="src/foo.js"></script>
+<script>
+	
+	$(function () {
+		$("#foo1").dreambuild().foo();
+		$("#foo2").dreambuild().foo({ text: "This is Foo." });
+	});
+
+</script>
+</body>
+</html>
